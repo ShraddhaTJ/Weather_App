@@ -1,11 +1,16 @@
 const request = require('request');
 const apiKey = 'd34c034c833b46d8aff458d2595d43ca';
+var cors = require('cors');
 
+// use it before all route definitions
 const express = require('express')
 const app = express()
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// use it before all route definitions
+app.use(cors({origin: '*'}));
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs')
@@ -17,11 +22,14 @@ app.get('/', function (req, res) {
 
 app.post('/', function (req, res) {
     let cityName = req.body.cityName;
+    if(!cityName){
+	cityName="Portland";
+	}
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`
 
     request(url, function (err, response, body) {
         if(err){
-            res.render('index', {weather: null, error: 'Error, please try again'});
+            res.render('index', {weather: [], error: 'Error, please try again'});
         }
         else {
             let weather = JSON.parse(body)
