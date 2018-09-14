@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Weather App</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div id="outer">
+        <h1>The Weather</h1>
+      <fieldset>
+        <form action="/" method="post">
+          <input name="cityName" type="text" class="weather-input" placeholder="Enter a City name" required>
+          <input type="submit" class="weather-button" value="  GO  ">
+        </form>
+      <!--  <% if(weather !== null){ %>
+            <p><%= weather %></p>
+          <% } %> -->
+          <div style="background:white">
+          <% for(var i=0;i<weather.length;i++){ %>
+            <p><%= weather[i] %></p>
+          <% } %> 
+        </div>
+          <% if(error !== null){ %>
+            <p><%= error %></p>
+          <% } %>
+      </fieldset>
+    </div>
+  </body>
+</html>
